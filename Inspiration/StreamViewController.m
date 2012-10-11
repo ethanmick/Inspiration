@@ -6,13 +6,13 @@
 //  Copyright (c) 2012 Ethan Mick. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "StreamViewController.h"
 
-@interface ViewController ()
+@interface StreamViewController ()
 
 @end
 
-@implementation ViewController
+@implementation StreamViewController
 
 - (void)viewDidLoad
 {

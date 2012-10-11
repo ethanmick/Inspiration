@@ -17,7 +17,7 @@
 		AA1F1D211627426A00EAF636 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA1F1D201627426A00EAF636 /* Default@2x.png */; };
 		AA1F1D231627426A00EAF636 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA1F1D221627426A00EAF636 /* Default-568h@2x.png */; };
 		AA1F1D261627426A00EAF636 /* Stream.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA1F1D241627426A00EAF636 /* Stream.storyboard */; };
-		AA1F1D291627426A00EAF636 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1F1D281627426A00EAF636 /* ViewController.m */; };
+		AA1F1D291627426A00EAF636 /* StreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1F1D281627426A00EAF636 /* StreamViewController.m */; };
 		AA5BA08716274475005D64E5 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5BA08616274475005D64E5 /* CFNetwork.framework */; };
 		AA5BA08A1627447B005D64E5 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5BA0891627447B005D64E5 /* SystemConfiguration.framework */; };
 		AA5BA08C16274483005D64E5 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5BA08B16274483005D64E5 /* MobileCoreServices.framework */; };
@@ -40,8 +40,8 @@
 		AA1F1D201627426A00EAF636 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		AA1F1D221627426A00EAF636 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		AA1F1D251627426A00EAF636 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Stream.storyboard; sourceTree = "<group>"; };
-		AA1F1D271627426A00EAF636 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		AA1F1D281627426A00EAF636 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		AA1F1D271627426A00EAF636 /* StreamViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StreamViewController.h; sourceTree = "<group>"; };
+		AA1F1D281627426A00EAF636 /* StreamViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StreamViewController.m; sourceTree = "<group>"; };
 		AA5BA08616274475005D64E5 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		AA5BA0891627447B005D64E5 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		AA5BA08B16274483005D64E5 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -113,13 +113,11 @@
 		AA1F1D131627426A00EAF636 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AACBDFEC162749F900788DFA /* Images */,
 				AA1F1D141627426A00EAF636 /* Inspiration-Info.plist */,
 				AA1F1D151627426A00EAF636 /* InfoPlist.strings */,
 				AA1F1D181627426A00EAF636 /* main.m */,
 				AA1F1D1A1627426A00EAF636 /* Inspiration-Prefix.pch */,
-				AA1F1D1E1627426A00EAF636 /* Default.png */,
-				AA1F1D201627426A00EAF636 /* Default@2x.png */,
-				AA1F1D221627426A00EAF636 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -137,10 +135,20 @@
 			isa = PBXGroup;
 			children = (
 				AA1F1D241627426A00EAF636 /* Stream.storyboard */,
-				AA1F1D271627426A00EAF636 /* ViewController.h */,
-				AA1F1D281627426A00EAF636 /* ViewController.m */,
+				AA1F1D271627426A00EAF636 /* StreamViewController.h */,
+				AA1F1D281627426A00EAF636 /* StreamViewController.m */,
 			);
 			name = Stream;
+			sourceTree = "<group>";
+		};
+		AACBDFEC162749F900788DFA /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				AA1F1D1E1627426A00EAF636 /* Default.png */,
+				AA1F1D201627426A00EAF636 /* Default@2x.png */,
+				AA1F1D221627426A00EAF636 /* Default-568h@2x.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,7 +219,7 @@
 			files = (
 				AA1F1D191627426A00EAF636 /* main.m in Sources */,
 				AA1F1D1D1627426A00EAF636 /* AppDelegate.m in Sources */,
-				AA1F1D291627426A00EAF636 /* ViewController.m in Sources */,
+				AA1F1D291627426A00EAF636 /* StreamViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
