@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StreamViewController : UICollectionViewController
+@interface StreamViewController : UICollectionViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @end

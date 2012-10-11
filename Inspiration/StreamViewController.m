@@ -26,4 +26,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UICollectionView Delegate Methods
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
+
 @end
