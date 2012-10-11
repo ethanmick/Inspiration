@@ -18,6 +18,11 @@
 		AA1F1D231627426A00EAF636 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA1F1D221627426A00EAF636 /* Default-568h@2x.png */; };
 		AA1F1D261627426A00EAF636 /* Stream.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA1F1D241627426A00EAF636 /* Stream.storyboard */; };
 		AA1F1D291627426A00EAF636 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1F1D281627426A00EAF636 /* ViewController.m */; };
+		AA5BA08716274475005D64E5 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5BA08616274475005D64E5 /* CFNetwork.framework */; };
+		AA5BA08A1627447B005D64E5 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5BA0891627447B005D64E5 /* SystemConfiguration.framework */; };
+		AA5BA08C16274483005D64E5 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5BA08B16274483005D64E5 /* MobileCoreServices.framework */; };
+		AA5BA08E16274495005D64E5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5BA08D16274495005D64E5 /* libz.dylib */; };
+		AA5BA090162744D0005D64E5 /* CloudMine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5BA08F162744D0005D64E5 /* CloudMine.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +42,11 @@
 		AA1F1D251627426A00EAF636 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Stream.storyboard; sourceTree = "<group>"; };
 		AA1F1D271627426A00EAF636 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		AA1F1D281627426A00EAF636 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		AA5BA08616274475005D64E5 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		AA5BA0891627447B005D64E5 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		AA5BA08B16274483005D64E5 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		AA5BA08D16274495005D64E5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		AA5BA08F162744D0005D64E5 /* CloudMine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CloudMine.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,9 +54,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA5BA08E16274495005D64E5 /* libz.dylib in Frameworks */,
+				AA5BA08C16274483005D64E5 /* MobileCoreServices.framework in Frameworks */,
+				AA5BA08A1627447B005D64E5 /* SystemConfiguration.framework in Frameworks */,
+				AA5BA08716274475005D64E5 /* CFNetwork.framework in Frameworks */,
 				AA1F1D0D1627426A00EAF636 /* UIKit.framework in Frameworks */,
 				AA1F1D0F1627426A00EAF636 /* Foundation.framework in Frameworks */,
 				AA1F1D111627426A00EAF636 /* CoreGraphics.framework in Frameworks */,
+				AA5BA090162744D0005D64E5 /* CloudMine.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +88,11 @@
 		AA1F1D0B1627426A00EAF636 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AA5BA08F162744D0005D64E5 /* CloudMine.framework */,
+				AA5BA08D16274495005D64E5 /* libz.dylib */,
+				AA5BA08B16274483005D64E5 /* MobileCoreServices.framework */,
+				AA5BA0891627447B005D64E5 /* SystemConfiguration.framework */,
+				AA5BA08616274475005D64E5 /* CFNetwork.framework */,
 				AA1F1D0C1627426A00EAF636 /* UIKit.framework */,
 				AA1F1D0E1627426A00EAF636 /* Foundation.framework */,
 				AA1F1D101627426A00EAF636 /* CoreGraphics.framework */,
@@ -272,9 +292,18 @@
 		AA1F1D2D1627426A00EAF636 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Inspiration/Inspiration-Prefix.pch";
 				INFOPLIST_FILE = "Inspiration/Inspiration-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -283,9 +312,18 @@
 		AA1F1D2E1627426A00EAF636 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Inspiration/Inspiration-Prefix.pch";
 				INFOPLIST_FILE = "Inspiration/Inspiration-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -310,6 +348,7 @@
 				AA1F1D2E1627426A00EAF636 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

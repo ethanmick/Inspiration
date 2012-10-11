@@ -7,12 +7,18 @@
 //
 
 #import "AppDelegate.h"
+#import <CloudMine/CloudMine.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    ///
+    /// Setup Cloudmine
+    ///
+    [[CMAPICredentials sharedInstance] setAppIdentifier:@"6a13f176e3364519886b095830028dad"];
+    [[CMAPICredentials sharedInstance] setAppSecret:@"b96d6102a4b4fb2980266c4b3f97973"];
+    
     return YES;
 }
 							
