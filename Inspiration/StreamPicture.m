@@ -10,4 +10,11 @@
 
 @implementation StreamPicture
 
+- (id)init {
+    if ( (self = [super init]) ) {
+        self.type = @"picture";
+    }
+    return self;
+}
+
 @end
