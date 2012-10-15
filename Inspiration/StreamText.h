@@ -10,4 +10,6 @@
 
 @interface StreamText : StreamItem
 
+@property (nonatomic, strong) NSString *text;
+
 @end
