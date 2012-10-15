@@ -23,6 +23,10 @@
 		AA5BA08C16274483005D64E5 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5BA08B16274483005D64E5 /* MobileCoreServices.framework */; };
 		AA5BA08E16274495005D64E5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5BA08D16274495005D64E5 /* libz.dylib */; };
 		AA5BA090162744D0005D64E5 /* CloudMine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5BA08F162744D0005D64E5 /* CloudMine.framework */; };
+		AACBDFF516274E8A00788DFA /* StreamCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AACBDFF416274E8A00788DFA /* StreamCell.m */; };
+		AACBE0001627658800788DFA /* StreamItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AACBDFFF1627658800788DFA /* StreamItem.m */; };
+		AACBE003162765A000788DFA /* StreamPicture.m in Sources */ = {isa = PBXBuildFile; fileRef = AACBE002162765A000788DFA /* StreamPicture.m */; };
+		AACBE006162765E800788DFA /* StreamText.m in Sources */ = {isa = PBXBuildFile; fileRef = AACBE005162765E800788DFA /* StreamText.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +51,14 @@
 		AA5BA08B16274483005D64E5 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		AA5BA08D16274495005D64E5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		AA5BA08F162744D0005D64E5 /* CloudMine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CloudMine.framework; sourceTree = "<group>"; };
+		AACBDFF316274E8A00788DFA /* StreamCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamCell.h; sourceTree = "<group>"; };
+		AACBDFF416274E8A00788DFA /* StreamCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamCell.m; sourceTree = "<group>"; };
+		AACBDFFE1627658800788DFA /* StreamItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamItem.h; sourceTree = "<group>"; };
+		AACBDFFF1627658800788DFA /* StreamItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamItem.m; sourceTree = "<group>"; };
+		AACBE001162765A000788DFA /* StreamPicture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamPicture.h; sourceTree = "<group>"; };
+		AACBE002162765A000788DFA /* StreamPicture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamPicture.m; sourceTree = "<group>"; };
+		AACBE004162765E800788DFA /* StreamText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamText.h; sourceTree = "<group>"; };
+		AACBE005162765E800788DFA /* StreamText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamText.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +117,7 @@
 			children = (
 				AA1F1D2F1627427300EAF636 /* App Delegate */,
 				AA1F1D301627428400EAF636 /* Stream */,
+				AACBDFFD1627654D00788DFA /* Model */,
 				AA1F1D131627426A00EAF636 /* Supporting Files */,
 			);
 			path = Inspiration;
@@ -134,6 +147,7 @@
 		AA1F1D301627428400EAF636 /* Stream */ = {
 			isa = PBXGroup;
 			children = (
+				AACBDFF216274DEF00788DFA /* Cells */,
 				AA1F1D241627426A00EAF636 /* Stream.storyboard */,
 				AA1F1D271627426A00EAF636 /* StreamViewController.h */,
 				AA1F1D281627426A00EAF636 /* StreamViewController.m */,
@@ -149,6 +163,28 @@
 				AA1F1D221627426A00EAF636 /* Default-568h@2x.png */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		AACBDFF216274DEF00788DFA /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				AACBDFF316274E8A00788DFA /* StreamCell.h */,
+				AACBDFF416274E8A00788DFA /* StreamCell.m */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		AACBDFFD1627654D00788DFA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AACBDFFE1627658800788DFA /* StreamItem.h */,
+				AACBDFFF1627658800788DFA /* StreamItem.m */,
+				AACBE001162765A000788DFA /* StreamPicture.h */,
+				AACBE002162765A000788DFA /* StreamPicture.m */,
+				AACBE004162765E800788DFA /* StreamText.h */,
+				AACBE005162765E800788DFA /* StreamText.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,6 +256,10 @@
 				AA1F1D191627426A00EAF636 /* main.m in Sources */,
 				AA1F1D1D1627426A00EAF636 /* AppDelegate.m in Sources */,
 				AA1F1D291627426A00EAF636 /* StreamViewController.m in Sources */,
+				AACBDFF516274E8A00788DFA /* StreamCell.m in Sources */,
+				AACBE0001627658800788DFA /* StreamItem.m in Sources */,
+				AACBE003162765A000788DFA /* StreamPicture.m in Sources */,
+				AACBE006162765E800788DFA /* StreamText.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
