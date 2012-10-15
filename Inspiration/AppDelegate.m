@@ -17,7 +17,7 @@
     /// Setup Cloudmine
     ///
     [[CMAPICredentials sharedInstance] setAppIdentifier:@"6a13f176e3364519886b095830028dad"];
-    [[CMAPICredentials sharedInstance] setAppSecret:@"b96d6102a4b4fb2980266c4b3f97973"];
+    [[CMAPICredentials sharedInstance] setAppSecret:@"fb96d6102a4b4fb2980266c4b3f97973"];
     
     return YES;
 }
