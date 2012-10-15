@@ -12,6 +12,13 @@
 
 @synthesize text = _text;
 
+- (id)init {
+    if ( (self = [super init]) ) {
+        self.type = @"text";
+    }
+    return self;
+}
+
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
