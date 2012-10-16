@@ -85,6 +85,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next"/>
                                                     <connections>
+                                                        <action selector="textFieldDidChange:" destination="B1d-Ds-449" eventType="editingChanged" id="4Oz-Dr-4kk"/>
                                                         <outlet property="delegate" destination="B1d-Ds-449" id="6u7-kd-d8w"/>
                                                     </connections>
                                                 </textField>
@@ -131,6 +132,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                                     <connections>
+                                                        <action selector="textFieldDidChange:" destination="B1d-Ds-449" eventType="editingChanged" id="0JI-X4-4Rc"/>
                                                         <outlet property="delegate" destination="B1d-Ds-449" id="l7N-fS-tsV"/>
                                                     </connections>
                                                 </textField>
@@ -205,7 +207,7 @@
                             <outlet property="delegate" destination="B1d-Ds-449" id="xwL-oO-VGr"/>
                         </connections>
                     </tableView>
-                    <value key="contentSizeForViewInPopover" type="size" width="320" height="400"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="320" height="250"/>
                     <connections>
                         <outlet property="passwordField" destination="7hN-Yx-IUP" id="hvv-LO-5Sq"/>
                         <outlet property="usernameField" destination="vN9-kc-69b" id="7ph-SY-ccr"/>
@@ -219,30 +221,6 @@
     <resources>
         <image name="man_24.png" width="24" height="24"/>
     </resources>
-    <classes>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="ProfileViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="usernameField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="StreamViewController" superclassName="UICollectionViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/StreamViewController.h"/>
-        </class>
-        <class className="UICollectionViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewController.h"/>
-        </class>
-        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
-        </class>
-        <class className="UICollectionViewLayout" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
