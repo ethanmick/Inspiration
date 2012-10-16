@@ -10,9 +10,23 @@
 
 @implementation StreamPicture
 
+@synthesize imageName = _imageName;
+
 - (id)init {
     if ( (self = [super init]) ) {
         self.typeOfItem = @"picture";
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    [aCoder encodeObject:_imageName forKey:@"imageName"];
+}
+
+- (id)initWithCoder:(NSCoder *)aCoder {
+    if ((self = [super initWithCoder:aCoder])) {
+        _imageName = [aCoder decodeObjectForKey:@"imageName"];
     }
     return self;
 }

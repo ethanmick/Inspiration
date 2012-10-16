@@ -10,4 +10,6 @@
 
 @interface StreamPicture : StreamItem
 
+@property (nonatomic, strong) NSString *imageName;
+
 @end
