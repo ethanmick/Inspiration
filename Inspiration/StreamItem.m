@@ -10,16 +10,16 @@
 
 @implementation StreamItem
 
-@synthesize type = _type;
+@synthesize typeOfItem = _typeOfItem;
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    [aCoder encodeObject:_type forKey:@"type"];
+    [aCoder encodeObject:_typeOfItem forKey:@"type"];
 }
 
 - (id)initWithCoder:(NSCoder *)aCoder {
     if ((self = [super initWithCoder:aCoder])) {
-        _type = [aCoder decodeObjectForKey:@"type"];
+        _typeOfItem = [aCoder decodeObjectForKey:@"type"];
     }
     return self;
 }

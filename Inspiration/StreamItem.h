@@ -10,6 +10,6 @@
 
 @interface StreamItem : CMObject
 
-@property (nonatomic, strong) NSString *type;
+@property (nonatomic, strong) NSString *typeOfItem;
 
 @end
