@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class StreamText, StreamPicture;
+
 @interface StreamCell : UICollectionViewCell
+
+- (void)configureAsText:(StreamText *)text;
+- (void)configureAsPicture:(StreamPicture *)pic;
 
 @end

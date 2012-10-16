@@ -20,4 +20,13 @@
     return self;
 }
 
+- (void)configureAsText:(StreamText *)text {
+    
+}
+
+
+- (void)configureAsPicture:(StreamPicture *)pic {
+    
+}
+
 @end
