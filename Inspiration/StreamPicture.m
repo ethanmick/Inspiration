@@ -11,6 +11,7 @@
 @implementation StreamPicture
 
 @synthesize imageName = _imageName;
+@synthesize image;
 
 - (id)init {
     if ( (self = [super init]) ) {
