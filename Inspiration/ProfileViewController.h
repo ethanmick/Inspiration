@@ -8,6 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ProfileViewController : UIViewController
+@protocol ProfileViewControllerDelegate;
+
+@interface ProfileViewController : UITableViewController <UITextFieldDelegate>
+
+@property (nonatomic, strong) CMUser *user;
+@property (nonatomic, weak) id<ProfileViewControllerDelegate> delegate;
+
+@end
+
+
+@protocol ProfileViewControllerDelegate <NSObject>
+@optional
+
+- (void)profileControllerDidSelectUser:(CMUser *)aUser;
 
 @end
