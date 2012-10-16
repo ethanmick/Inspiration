@@ -12,7 +12,7 @@
 
 - (id)init {
     if ( (self = [super init]) ) {
-        self.type = @"picture";
+        self.typeOfItem = @"picture";
     }
     return self;
 }

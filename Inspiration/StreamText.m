@@ -14,7 +14,7 @@
 
 - (id)init {
     if ( (self = [super init]) ) {
-        self.type = @"text";
+        self.typeOfItem = @"text";
     }
     return self;
 }
