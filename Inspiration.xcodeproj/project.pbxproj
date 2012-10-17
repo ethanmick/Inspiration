@@ -23,6 +23,14 @@
 		AA5BA08C16274483005D64E5 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5BA08B16274483005D64E5 /* MobileCoreServices.framework */; };
 		AA5BA08E16274495005D64E5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5BA08D16274495005D64E5 /* libz.dylib */; };
 		AA5BA090162744D0005D64E5 /* CloudMine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5BA08F162744D0005D64E5 /* CloudMine.framework */; };
+		AA5BF953162D0ABF008C55D2 /* man_64.png in Resources */ = {isa = PBXBuildFile; fileRef = AA5BF952162D0ABF008C55D2 /* man_64.png */; };
+		AA5BF956162D0D96008C55D2 /* man_48.png in Resources */ = {isa = PBXBuildFile; fileRef = AA5BF955162D0D95008C55D2 /* man_48.png */; };
+		AA5BF958162D0DA6008C55D2 /* man_24.png in Resources */ = {isa = PBXBuildFile; fileRef = AA5BF957162D0DA6008C55D2 /* man_24.png */; };
+		AA5BF95C162D0EC6008C55D2 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5BF95B162D0EC6008C55D2 /* ProfileViewController.m */; };
+		AA5BF96E162DC769008C55D2 /* SimpleKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5BF96D162DC769008C55D2 /* SimpleKeychain.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AA5BF972162DC81E008C55D2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5BF971162DC81D008C55D2 /* Security.framework */; };
+		AA5BF976162DE2BD008C55D2 /* ContentPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5BF975162DE2BD008C55D2 /* ContentPickerViewController.m */; };
+		AA917BE1162DE6AA000FA6A6 /* AddTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA917BE0162DE6AA000FA6A6 /* AddTextViewController.m */; };
 		AACBDFF516274E8A00788DFA /* StreamCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AACBDFF416274E8A00788DFA /* StreamCell.m */; };
 		AACBE0001627658800788DFA /* StreamItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AACBDFFF1627658800788DFA /* StreamItem.m */; };
 		AACBE003162765A000788DFA /* StreamPicture.m in Sources */ = {isa = PBXBuildFile; fileRef = AACBE002162765A000788DFA /* StreamPicture.m */; };
@@ -51,6 +59,18 @@
 		AA5BA08B16274483005D64E5 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		AA5BA08D16274495005D64E5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		AA5BA08F162744D0005D64E5 /* CloudMine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CloudMine.framework; sourceTree = "<group>"; };
+		AA5BF952162D0ABF008C55D2 /* man_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = man_64.png; sourceTree = "<group>"; };
+		AA5BF955162D0D95008C55D2 /* man_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = man_48.png; sourceTree = "<group>"; };
+		AA5BF957162D0DA6008C55D2 /* man_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = man_24.png; sourceTree = "<group>"; };
+		AA5BF95A162D0EC6008C55D2 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		AA5BF95B162D0EC6008C55D2 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		AA5BF96C162DC769008C55D2 /* SimpleKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleKeychain.h; sourceTree = "<group>"; };
+		AA5BF96D162DC769008C55D2 /* SimpleKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleKeychain.m; sourceTree = "<group>"; };
+		AA5BF971162DC81D008C55D2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		AA5BF974162DE2BD008C55D2 /* ContentPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentPickerViewController.h; sourceTree = "<group>"; };
+		AA5BF975162DE2BD008C55D2 /* ContentPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentPickerViewController.m; sourceTree = "<group>"; };
+		AA917BDF162DE6AA000FA6A6 /* AddTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTextViewController.h; sourceTree = "<group>"; };
+		AA917BE0162DE6AA000FA6A6 /* AddTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTextViewController.m; sourceTree = "<group>"; };
 		AACBDFF316274E8A00788DFA /* StreamCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamCell.h; sourceTree = "<group>"; };
 		AACBDFF416274E8A00788DFA /* StreamCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamCell.m; sourceTree = "<group>"; };
 		AACBDFFE1627658800788DFA /* StreamItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamItem.h; sourceTree = "<group>"; };
@@ -66,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA5BF972162DC81E008C55D2 /* Security.framework in Frameworks */,
 				AA5BA08E16274495005D64E5 /* libz.dylib in Frameworks */,
 				AA5BA08C16274483005D64E5 /* MobileCoreServices.framework in Frameworks */,
 				AA5BA08A1627447B005D64E5 /* SystemConfiguration.framework in Frameworks */,
@@ -100,6 +121,7 @@
 		AA1F1D0B1627426A00EAF636 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AA5BF971162DC81D008C55D2 /* Security.framework */,
 				AA5BA08F162744D0005D64E5 /* CloudMine.framework */,
 				AA5BA08D16274495005D64E5 /* libz.dylib */,
 				AA5BA08B16274483005D64E5 /* MobileCoreServices.framework */,
@@ -117,6 +139,8 @@
 			children = (
 				AA1F1D2F1627427300EAF636 /* App Delegate */,
 				AA1F1D301627428400EAF636 /* Stream */,
+				AA5BF959162D0EA1008C55D2 /* Profile */,
+				AA5BF973162DE2A1008C55D2 /* Add Info */,
 				AACBDFFD1627654D00788DFA /* Model */,
 				AA1F1D131627426A00EAF636 /* Supporting Files */,
 			);
@@ -155,9 +179,42 @@
 			name = Stream;
 			sourceTree = "<group>";
 		};
+		AA5BF959162D0EA1008C55D2 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				AA5BF95A162D0EC6008C55D2 /* ProfileViewController.h */,
+				AA5BF95B162D0EC6008C55D2 /* ProfileViewController.m */,
+				AA5BF95D162DA5C4008C55D2 /* User Management */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		AA5BF95D162DA5C4008C55D2 /* User Management */ = {
+			isa = PBXGroup;
+			children = (
+				AA5BF96C162DC769008C55D2 /* SimpleKeychain.h */,
+				AA5BF96D162DC769008C55D2 /* SimpleKeychain.m */,
+			);
+			name = "User Management";
+			sourceTree = "<group>";
+		};
+		AA5BF973162DE2A1008C55D2 /* Add Info */ = {
+			isa = PBXGroup;
+			children = (
+				AA5BF974162DE2BD008C55D2 /* ContentPickerViewController.h */,
+				AA5BF975162DE2BD008C55D2 /* ContentPickerViewController.m */,
+				AA917BDF162DE6AA000FA6A6 /* AddTextViewController.h */,
+				AA917BE0162DE6AA000FA6A6 /* AddTextViewController.m */,
+			);
+			name = "Add Info";
+			sourceTree = "<group>";
+		};
 		AACBDFEC162749F900788DFA /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				AA5BF957162D0DA6008C55D2 /* man_24.png */,
+				AA5BF955162D0D95008C55D2 /* man_48.png */,
+				AA5BF952162D0ABF008C55D2 /* man_64.png */,
 				AA1F1D1E1627426A00EAF636 /* Default.png */,
 				AA1F1D201627426A00EAF636 /* Default@2x.png */,
 				AA1F1D221627426A00EAF636 /* Default-568h@2x.png */,
@@ -243,6 +300,9 @@
 				AA1F1D211627426A00EAF636 /* Default@2x.png in Resources */,
 				AA1F1D231627426A00EAF636 /* Default-568h@2x.png in Resources */,
 				AA1F1D261627426A00EAF636 /* Stream.storyboard in Resources */,
+				AA5BF953162D0ABF008C55D2 /* man_64.png in Resources */,
+				AA5BF956162D0D96008C55D2 /* man_48.png in Resources */,
+				AA5BF958162D0DA6008C55D2 /* man_24.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +320,10 @@
 				AACBE0001627658800788DFA /* StreamItem.m in Sources */,
 				AACBE003162765A000788DFA /* StreamPicture.m in Sources */,
 				AACBE006162765E800788DFA /* StreamText.m in Sources */,
+				AA5BF95C162D0EC6008C55D2 /* ProfileViewController.m in Sources */,
+				AA5BF96E162DC769008C55D2 /* SimpleKeychain.m in Sources */,
+				AA5BF976162DE2BD008C55D2 /* ContentPickerViewController.m in Sources */,
+				AA917BE1162DE6AA000FA6A6 /* AddTextViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
