@@ -15,7 +15,7 @@
 
 @property (nonatomic, strong) NSMutableArray *streamItems;
 
-- (void)openProfile:(id)sender;
+- (void)refreshData;
 
 @end
 
@@ -36,6 +36,24 @@
     flowLayout.minimumInteritemSpacing = 20.0;
     flowLayout.sectionInset = UIEdgeInsetsMake(50, 50, 23.6, 0);
     
+    [self refreshData];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    NSString *identifier = [segue identifier];
+    if ( [identifier isEqualToString:@"profile"] ) {
+        ProfileViewController *profileController = segue.destinationViewController;
+        profileController.delegate = self;
+        profileController.user = self.user;
+    } else if ([identifier isEqualToString:@"addContent"]) {
+        DLog(@"WTF IS THIS: %@", ((UIStoryboardPopoverSegue *)segue).popoverController );
+        ((UIStoryboardPopoverSegue *)segue).popoverController.delegate = self;
+    }
+}
+
+- (void)refreshData {
+    
     ///
     /// Load items from Cloudmine
     ///
@@ -43,8 +61,25 @@
     
     
     [store allObjectsOfClass:[StreamText class] additionalOptions:nil callback:^(CMObjectFetchResponse *response) {
-        [self.streamItems addObjectsFromArray:response.objects];
-        DLog(@"Text Items: %@", response.objects);
+        
+        NSMutableArray *toAdd = [NSMutableArray array];
+        
+        for (StreamText *returnedText in response.objects) {
+            BOOL add = YES;
+            for (StreamText *currentText in self.streamItems) {
+                if ( [returnedText isEqual:currentText] ) {
+                    add = NO;
+                }
+            }
+            if (add) {
+                [toAdd addObject:returnedText];
+            }
+        }
+        
+        for (StreamText *toAddText in toAdd) {
+            [self.streamItems addObject:toAddText];
+        }
+
         [self.collectionView reloadData];
     }];
     
@@ -62,19 +97,12 @@
         //imageView.frame = CGRectMake(100, 100, 400, 400);
         //[self.collectionView addSubview:imageView];
     }];
-
-    
-    
     
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    NSString *identifier = [segue identifier];
-    if ( [identifier isEqualToString:@"profile"] ) {
-        ProfileViewController *profileController = segue.destinationViewController;
-        profileController.delegate = self;
-        profileController.user = self.user;
+- (void)printing:(NSOrderedSet *)set {
+    for (StreamText *text in set) {
+        DLog(@"Text: %@ - %@", text.objectId, text.text);
     }
 }
 
@@ -118,6 +146,15 @@
     DLog(@"Created and Logged in!: %@ - %@", aUser.userId, aUser.password);
 }
 
+#pragma mark - UIPopOverController Delegate Methods
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
+    ///
+    /// Refresh our stream
+    ///
+    [self refreshData];
+}
+
 
 #pragma mark - UICollectionView Delegate Methods
 
@@ -151,7 +188,7 @@
                   layout:(UICollectionViewLayout*)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    return CGSizeMake(200, 200);
+    return CGSizeMake(350, 350);
 
 }
 
