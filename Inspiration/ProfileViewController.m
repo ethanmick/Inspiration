@@ -97,8 +97,6 @@
 }
 
 - (IBAction)textFieldDidChange:(UITextField *)sender {
-    //UITextField *textField = (UITextField *)[notification object];
-    
     // Update the user property as the text fields change
     if ([sender isEqual:_usernameField]) {
         _user.userId = _usernameField.text;
