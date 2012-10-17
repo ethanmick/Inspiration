@@ -257,6 +257,7 @@
                     additionalOptions:nil
                              callback:^(CMFileUploadResponse *response) {
                                  DLog(@"Image File Saved: %d", response.result);
+                                 [self refreshData];
                              }];
     
     
@@ -272,10 +273,10 @@
                             additionalOptions:nil
                                      callback:^(CMFileUploadResponse *response) {
                                          DLog(@"Image Filed User Saved: %d", response.result);
+                                         [self refreshData];
                                      }];
         
     }
-    
         
     [self.imagePopUp dismissPopoverAnimated:YES];
 }
@@ -294,6 +295,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     StreamCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"STREAM_CELL" forIndexPath:indexPath];
+    [cell reset];
     
     if ([[[self.streamItems objectAtIndex:indexPath.row] typeOfItem] isEqualToString:@"text"]) {
         [cell configureAsText:[self.streamItems objectAtIndex:indexPath.row]];
