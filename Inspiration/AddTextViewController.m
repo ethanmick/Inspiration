@@ -39,7 +39,7 @@
         DLog(@"Item Saved? %@", response.uploadStatuses);
     }];
     
-    CMUser *user = [[CMStore store] user];
+    CMUser *user = [[CMStore defaultStore] user];
     
     if (user) {
         [newText saveWithUser:user callback:^(CMObjectUploadResponse *response) {
