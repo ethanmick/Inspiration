@@ -15,6 +15,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UILabel *streamLabel;
 
 - (void)login;
 - (void)createAccountAndLogin;
@@ -66,6 +67,8 @@
     
     self.usernameField.text = [userInfo valueForKey:@"username"];
     self.passwordField.text = [userInfo valueForKey:@"password"];
+    self.user.userId = [userInfo valueForKey:@"username"];
+    self.user.password = [userInfo valueForKey:@"password"];
 }
 
 #pragma mark - Cloudmine Login Methods
@@ -106,8 +109,6 @@
 }
 
 
-
-
 #pragma mark - UITableViewDelegate Methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -122,14 +123,50 @@
     
     // If the user selects the login button
     // Simplier than making an outlet just to check
-    if (indexPath.row == 0)
-        [self login];
     
-    // If the user selects the create account button
-    // Simplier than making an outlet just to check
-    if (indexPath.row == 1)
-        [self createAccountAndLogin];
+    switch (indexPath.section) {
+        case 1:
+        {
+            if (indexPath.row == 0)
+                [self login];
+            
+            if (indexPath.row == 1)
+                [self createAccountAndLogin];
+            
+            break;
+        }
+        case 2:
+        {
+            ///
+            /// Lauch my Stream
+            ///
+            if ( [[[CMStore defaultStore] user] isLoggedIn] ) {
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeToPersonalStream" object:nil];
+                if ([self.streamLabel.text isEqualToString:@"My Stream"]) {
+                    self.streamLabel.text = @"Global Stream";
+                } else {
+                    self.streamLabel.text = @"My Stream";
+                }
+                
+            } else {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Please Log In"
+                                                                message:@"To view a personal stream, please log in."
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"Okay"
+                                                      otherButtonTitles:nil];
+                [alert show];
+            }
+            
+            
+            break;
+        }
+            
+        default:
+            break;
+    }
     
+        
 }
 
 
