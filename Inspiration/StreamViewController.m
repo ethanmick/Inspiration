@@ -13,15 +13,18 @@
 
 @interface StreamViewController ()
 
-@property (nonatomic, strong) NSMutableArray *streamItems;
+@property (atomic, strong) NSMutableArray *streamItems;
+@property (nonatomic, strong) UIPopoverController *imagePopUp;
 
 - (void)refreshData;
+- (IBAction)launchImagePicker:(id)sender;
+- (void)mergeArray:(NSMutableArray *)original withArray:(NSArray *)target;
 
 @end
 
 @implementation StreamViewController
 
-@synthesize streamItems, user = _user;
+@synthesize streamItems, user = _user, imagePopUp;
 
 
 - (void)viewDidLoad
@@ -30,6 +33,11 @@
     
 	[self.collectionView registerClass:[StreamCell class] forCellWithReuseIdentifier:@"STREAM_CELL"];
     self.streamItems = [[NSMutableArray alloc] init];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(launchPicker:)
+                                                 name:@"LaunchUIIMagePicker"
+                                               object:nil];
     
     UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
     flowLayout.minimumLineSpacing = 30.0;
@@ -47,7 +55,6 @@
         profileController.delegate = self;
         profileController.user = self.user;
     } else if ([identifier isEqualToString:@"addContent"]) {
-        DLog(@"WTF IS THIS: %@", ((UIStoryboardPopoverSegue *)segue).popoverController );
         ((UIStoryboardPopoverSegue *)segue).popoverController.delegate = self;
     }
 }
@@ -59,51 +66,116 @@
     ///
     CMStore *store = [CMStore defaultStore];
     
+    [store allObjectsWithOptions:nil callback:^(CMObjectFetchResponse *response) {
+        DLog(@"Response: %@", response.objects);
+        self.streamItems = [NSMutableArray arrayWithArray:response.objects];
+        
+        NSMutableArray *toRemove = [NSMutableArray array];
+        
+        for (id object in self.streamItems) {
+            
+            if ( ![object isKindOfClass:[StreamText class]] && ![object isKindOfClass:[StreamPicture class]] ) {
+                [toRemove addObject:object];
+            }
+            
+            if ([object isKindOfClass:[StreamPicture class]]) {
+                StreamPicture *pic = (StreamPicture *)object;
+                [store fileWithName:pic.imageName
+                  additionalOptions:nil callback:^(CMFileFetchResponse *response) {
+                      NSData *imageData = response.file.fileData;
+                      if (imageData) {
+                          pic.image = [UIImage imageWithData:imageData];
+                          [self.collectionView reloadData];
+                      }
+                  }];
+            }
+            
+        }
+        
+        for (id object in toRemove) {
+            [self.streamItems removeObject:object];
+        }
+        
+        DLog(@"Finished: %@", streamItems);
+        
+        [self.collectionView reloadData];
+    }];
+    
+    /*
+    
+    
     
     [store allObjectsOfClass:[StreamText class] additionalOptions:nil callback:^(CMObjectFetchResponse *response) {
         
-        NSMutableArray *toAdd = [NSMutableArray array];
+        [self mergeArray:self.streamItems withArray:response.objects];
+        DLog(@"response: %@", response.objects);
+        DLog(@"Text: %@", self.streamItems);
+        [self.collectionView reloadData];
+    }];
+    
+    
+    [store allObjectsOfClass:[StreamPicture class] additionalOptions:nil callback:^(CMObjectFetchResponse *response) {
+        [self mergeArray:self.streamItems withArray:response.objects];
         
-        for (StreamText *returnedText in response.objects) {
+        DLog(@"Pics: %@", self.streamItems);
+        
+        for (StreamPicture *picture in response.objects) {
+            ///
+            /// Get the actual Images
+            ///
+            [[CMStore store] fileWithName:picture.imageName
+                        additionalOptions:nil
+                                 callback:^(CMFileFetchResponse *response) {
+                                     DLog(@"File: %@", response.file);
+                                     ///
+                                     /// Do Something
+                                     ///
+                                     
+                                     NSData *imageData = response.file.fileData;
+                                     if (imageData) {
+                                         picture.image = [UIImage imageWithData:imageData];
+                                     }
+                                 }];
+        }
+        
+        [self.collectionView reloadData];
+    }];
+     */
+    
+}
+
+- (void)mergeArray:(NSMutableArray *)original withArray:(NSArray *)target {
+    
+    @synchronized(self) {
+        DLog(@"Original: %@", original);
+        DLog(@"Target: %@", target);
+        
+        NSMutableArray *toAddArray = [NSMutableArray array];
+        
+        if ([original count] == 0) {
+            [original addObjectsFromArray:target];
+            return;
+        }
+        
+        for (id firstObject in original) {
             BOOL add = YES;
-            for (StreamText *currentText in self.streamItems) {
-                if ( [returnedText isEqual:currentText] ) {
+            for (id secondObject in target) {
+                if ( [firstObject isEqual:secondObject] ) {
                     add = NO;
                 }
             }
             if (add) {
-                [toAdd addObject:returnedText];
+                [toAddArray addObject:firstObject];
             }
         }
         
-        for (StreamText *toAddText in toAdd) {
-            [self.streamItems addObject:toAddText];
+        for (id toAdd in toAddArray) {
+            [original addObject:toAdd];
         }
-
-        [self.collectionView reloadData];
-    }];
-    
-    [store allObjectsOfClass:[StreamPicture class] additionalOptions:nil callback:^(CMObjectFetchResponse *response) {
-        // Get the meta data about the pictures
-        DLog(@"Pictures: %@", response.objects);
-    }];
-    
-    
-    
-    [store fileWithName:@"BeautifulWoman.jpg" additionalOptions:nil callback:^(CMFileFetchResponse *response) {
-        //NSData *imageData = response.file.fileData;
-        //UIImage *image = [[UIImage alloc ] initWithData:imageData];
-        //UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-        //imageView.frame = CGRectMake(100, 100, 400, 400);
-        //[self.collectionView addSubview:imageView];
-    }];
-    
-}
-
-- (void)printing:(NSOrderedSet *)set {
-    for (StreamText *text in set) {
-        DLog(@"Text: %@ - %@", text.objectId, text.text);
+        
+        DLog(@"End: %@", original);
     }
+    
 }
 
 #pragma mark - Get/Set User
@@ -153,6 +225,59 @@
     /// Refresh our stream
     ///
     [self refreshData];
+}
+
+- (IBAction)launchImagePicker:(id)sender {
+    
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.delegate = self;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    self.imagePopUp = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
+    [self.imagePopUp presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage *imagePicked = [info valueForKey:UIImagePickerControllerOriginalImage];
+    
+    ///
+    /// Save the image
+    ///
+    NSData *imageData = UIImagePNGRepresentation(imagePicked);
+    NSString *imageName = [NSString stringWithFormat:@"image%@%d", [[NSDate alloc] init], arc4random()];
+    
+    StreamPicture *picData = [[StreamPicture alloc] init];
+    picData.imageName = imageName;
+    
+    [picData save:^(CMObjectUploadResponse *response) {
+        DLog(@"Image Saved %@", response.uploadStatuses);
+    }];
+    
+    [[CMStore store] saveFileWithData:imageData
+                                named:imageName
+                    additionalOptions:nil
+                             callback:^(CMFileUploadResponse *response) {
+                                 DLog(@"Image File Saved: %d", response.result);
+                             }];
+    
+    
+    CMUser *user = [[CMStore store] user];
+    
+    if (user) {
+        [picData saveWithUser:user callback:^(CMObjectUploadResponse *response) {
+            DLog(@"Image Saved with User.");
+        }];
+        
+        [[CMStore store] saveUserFileWithData:imageData
+                                        named:imageName
+                            additionalOptions:nil
+                                     callback:^(CMFileUploadResponse *response) {
+                                         DLog(@"Image Filed User Saved: %d", response.result);
+                                     }];
+        
+    }
+    
+        
+    [self.imagePopUp dismissPopoverAnimated:YES];
 }
 
 
