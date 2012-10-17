@@ -7,6 +7,8 @@
 //
 
 #import "AddTextViewController.h"
+#import "StreamText.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface AddTextViewController ()
 
@@ -14,25 +16,40 @@
 
 @implementation AddTextViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@synthesize textView;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+	
+    self.textView.layer.borderWidth = 1.0f;
+    self.textView.layer.borderColor = [[UIColor blackColor] CGColor];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    ///
+    /// Save the text to the global stream, and to the user stream if applicable
+    ///
+    StreamText *newText = [[StreamText alloc] init];
+    newText.text = textView.text;
+    
+    [newText save:^(CMObjectUploadResponse *response) {
+        DLog(@"Item Saved? %@", response.uploadStatuses);
+    }];
+    
+    CMUser *user = [[CMStore store] user];
+    
+    if (user) {
+        [newText saveWithUser:user callback:^(CMObjectUploadResponse *response) {
+            DLog(@"Saved With user: %@", response.uploadStatuses);
+        }];
+    }
+    
+
 }
+
+
 
 @end
