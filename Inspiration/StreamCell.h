@@ -12,7 +12,11 @@
 
 @interface StreamCell : UICollectionViewCell
 
+@property (nonatomic, strong) UILabel *textLabel;
+@property (nonatomic, strong) UIImageView *image;
+
 - (void)configureAsText:(StreamText *)text;
 - (void)configureAsPicture:(StreamPicture *)pic;
+- (void)reset;
 
 @end

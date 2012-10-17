@@ -22,22 +22,27 @@
     return self;
 }
 
+- (void)reset {
+    [self.textLabel removeFromSuperview];
+    [self.image removeFromSuperview];
+}
+
 - (void)configureAsText:(StreamText *)text {
-    UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectInset(self.bounds, 5, 5)];
-    textLabel.text = text.text;
-    textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    textLabel.adjustsFontSizeToFitWidth = YES;
-    textLabel.numberOfLines = 0;
-    textLabel.textAlignment = NSTextAlignmentCenter;
-    textLabel.font = [UIFont systemFontOfSize:20];
-    [self.contentView addSubview:textLabel];
+    self.textLabel = [[UILabel alloc] initWithFrame:CGRectInset(self.bounds, 5, 5)];
+    self.textLabel.text = text.text;
+    self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.textLabel.adjustsFontSizeToFitWidth = YES;
+    self.textLabel.numberOfLines = 0;
+    self.textLabel.textAlignment = NSTextAlignmentCenter;
+    self.textLabel.font = [UIFont systemFontOfSize:20];
+    [self.contentView addSubview:self.textLabel];
 }
 
 
 - (void)configureAsPicture:(StreamPicture *)pic {
-    UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectInset(self.bounds, 5, 5)];
-    image.image = pic.image;
-    [self.contentView addSubview:image];
+    self.image = [[UIImageView alloc] initWithFrame:CGRectInset(self.bounds, 5, 5)];
+    self.image.image = pic.image;
+    [self.contentView addSubview:self.image];
 }
 
 
