@@ -24,4 +24,8 @@
     return self;
 }
 
+- (BOOL)isEqual:(id)object {
+    return [self.objectId isEqual:((StreamItem *)object).objectId];
+}
+
 @end
