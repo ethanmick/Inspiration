@@ -55,6 +55,12 @@
                                 </segue>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem systemItem="camera" id="NdJ-53-ijq">
+                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <connections>
+                                <action selector="launchImagePicker:" destination="Ll2-aS-tZw" id="KBX-OM-jVJ"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="khI-mL-2gL">
                         <barButtonItem key="rightBarButtonItem" image="man_24.png" id="uC0-XE-uta">
@@ -279,30 +285,6 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="96A-yF-EwJ">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Qxn-bZ-JbR">
-                                        <rect key="frame" x="0.0" y="96" width="768" height="46"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="45" y="1" width="658" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Add an Inspirational Image" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E2k-IG-jM2">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <constraints>
-                                            <constraint firstItem="E2k-IG-jM2" firstAttribute="leading" secondItem="Qxn-bZ-JbR" secondAttribute="leading" constant="20" type="user" id="CSL-pm-syx"/>
-                                            <constraint firstItem="E2k-IG-jM2" firstAttribute="top" secondItem="Qxn-bZ-JbR" secondAttribute="top" constant="12" id="oZ7-yW-vsk"/>
-                                        </constraints>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="eme-Pu-9An" id="xgG-h7-CiD"/>
@@ -389,6 +371,9 @@
         </class>
         <class className="StreamViewController" superclassName="UICollectionViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/StreamViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="launchImagePicker:"/>
+            </relationships>
         </class>
         <class className="UICollectionViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewController.h"/>
