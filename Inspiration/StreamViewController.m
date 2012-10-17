@@ -15,16 +15,18 @@
 
 @property (atomic, strong) NSMutableArray *streamItems;
 @property (nonatomic, strong) UIPopoverController *imagePopUp;
+@property (nonatomic, strong) UIPopoverController *currentPopOver;
 
 - (void)refreshData;
 - (IBAction)launchImagePicker:(id)sender;
 - (void)mergeArray:(NSMutableArray *)original withArray:(NSArray *)target;
+- (void)dismissCurrentPopover;
 
 @end
 
 @implementation StreamViewController
 
-@synthesize streamItems, user = _user, imagePopUp;
+@synthesize streamItems, user = _user, imagePopUp, currentPopOver;
 
 
 - (void)viewDidLoad
@@ -48,6 +50,13 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ( [segue isKindOfClass:[UIStoryboardPopoverSegue class]]) {
+        if (self.currentPopOver != nil) {
+            [self.currentPopOver dismissPopoverAnimated:NO];
+        }
+        self.currentPopOver = ((UIStoryboardPopoverSegue *)segue).popoverController;
+    }
     
     NSString *identifier = [segue identifier];
     if ( [identifier isEqualToString:@"profile"] ) {
@@ -96,51 +105,8 @@
             [self.streamItems removeObject:object];
         }
         
-        DLog(@"Finished: %@", streamItems);
-        
         [self.collectionView reloadData];
     }];
-    
-    /*
-    
-    
-    
-    [store allObjectsOfClass:[StreamText class] additionalOptions:nil callback:^(CMObjectFetchResponse *response) {
-        
-        [self mergeArray:self.streamItems withArray:response.objects];
-        DLog(@"response: %@", response.objects);
-        DLog(@"Text: %@", self.streamItems);
-        [self.collectionView reloadData];
-    }];
-    
-    
-    [store allObjectsOfClass:[StreamPicture class] additionalOptions:nil callback:^(CMObjectFetchResponse *response) {
-        [self mergeArray:self.streamItems withArray:response.objects];
-        
-        DLog(@"Pics: %@", self.streamItems);
-        
-        for (StreamPicture *picture in response.objects) {
-            ///
-            /// Get the actual Images
-            ///
-            [[CMStore store] fileWithName:picture.imageName
-                        additionalOptions:nil
-                                 callback:^(CMFileFetchResponse *response) {
-                                     DLog(@"File: %@", response.file);
-                                     ///
-                                     /// Do Something
-                                     ///
-                                     
-                                     NSData *imageData = response.file.fileData;
-                                     if (imageData) {
-                                         picture.image = [UIImage imageWithData:imageData];
-                                     }
-                                 }];
-        }
-        
-        [self.collectionView reloadData];
-    }];
-     */
     
 }
 
@@ -229,10 +195,13 @@
 
 - (IBAction)launchImagePicker:(id)sender {
     
+    [self dismissCurrentPopover];
+    
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.delegate = self;
     imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     self.imagePopUp = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
+    self.currentPopOver = self.imagePopUp;
     [self.imagePopUp presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
@@ -281,6 +250,13 @@
     [self.imagePopUp dismissPopoverAnimated:YES];
 }
 
+
+- (void)dismissCurrentPopover {
+    
+    if (self.currentPopOver != nil) {
+        [self.currentPopOver dismissPopoverAnimated:NO];
+    }
+}
 
 #pragma mark - UICollectionView Delegate Methods
 
