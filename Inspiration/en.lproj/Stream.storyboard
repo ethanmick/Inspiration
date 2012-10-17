@@ -46,6 +46,16 @@
                             <outlet property="delegate" destination="Ll2-aS-tZw" id="0a4-VR-djI"/>
                         </connections>
                     </collectionView>
+                    <toolbarItems>
+                        <barButtonItem systemItem="add" id="JFQ-Ru-JG1">
+                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <connections>
+                                <segue destination="n1t-yh-DJs" kind="popover" identifier="addContent" popoverAnchorBarButtonItem="JFQ-Ru-JG1" id="mLO-Kz-vyt">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="khI-mL-2gL">
                         <barButtonItem key="rightBarButtonItem" image="man_24.png" id="uC0-XE-uta">
                             <connections>
@@ -55,6 +65,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="blackOpaque"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dsf-Eo-LxM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -217,10 +228,178 @@
             </objects>
             <point key="canvasLocation" x="246" y="-205"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="IOR-7r-jAi">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="n1t-yh-DJs" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackOpaque" id="U1T-ss-mVd">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="eme-Pu-9An" kind="relationship" relationship="rootViewController" id="BX2-uT-h4A"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bxb-h3-KRC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="256" y="960"/>
+        </scene>
+        <!--Content Picker View Controller - Add Content-->
+        <scene sceneID="vh2-Us-c6k">
+            <objects>
+                <tableViewController title="Add Content" id="eme-Pu-9An" customClass="ContentPickerViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="6VI-7v-B9L">
+                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="x2B-MU-xwh">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="z6d-H9-yQq">
+                                        <rect key="frame" x="0.0" y="30" width="768" height="46"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="45" y="1" width="658" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Add Some Inspirational Text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y1i-o8-JfC">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="y1i-o8-JfC" firstAttribute="top" secondItem="z6d-H9-yQq" secondAttribute="top" constant="12" id="CXV-Zc-KeE"/>
+                                            <constraint firstItem="y1i-o8-JfC" firstAttribute="leading" secondItem="z6d-H9-yQq" secondAttribute="leading" constant="20" type="user" id="qK8-Lb-lsI"/>
+                                        </constraints>
+                                        <connections>
+                                            <segue destination="Cgh-Nr-HZ3" kind="push" id="qT1-zR-YmF"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="96A-yF-EwJ">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Qxn-bZ-JbR">
+                                        <rect key="frame" x="0.0" y="96" width="768" height="46"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="45" y="1" width="658" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Add an Inspirational Image" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E2k-IG-jM2">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="E2k-IG-jM2" firstAttribute="leading" secondItem="Qxn-bZ-JbR" secondAttribute="leading" constant="20" type="user" id="CSL-pm-syx"/>
+                                            <constraint firstItem="E2k-IG-jM2" firstAttribute="top" secondItem="Qxn-bZ-JbR" secondAttribute="top" constant="12" id="oZ7-yW-vsk"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="eme-Pu-9An" id="xgG-h7-CiD"/>
+                            <outlet property="delegate" destination="eme-Pu-9An" id="eFO-Wj-Taw"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Add Content" id="RME-pJ-j4R"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="320" height="400"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tRf-0c-pu1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1224" y="960"/>
+        </scene>
+        <!--Add Text View Controller - Text-->
+        <scene sceneID="mdA-bF-ocY">
+            <objects>
+                <viewController title="Text" modalPresentationStyle="currentContext" id="Cgh-Nr-HZ3" customClass="AddTextViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="M0t-vg-kY7">
+                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Type Your Inspiration:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lJY-Gm-be8">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6oQ-KW-45D">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="2mP-gh-zj0"/>
+                                    <constraint firstAttribute="height" constant="250" id="4kd-ek-n8a"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Cgh-Nr-HZ3" id="OaZ-bJ-ijn"/>
+                                </connections>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6oQ-KW-45D" firstAttribute="leading" secondItem="lJY-Gm-be8" secondAttribute="leading" type="default" id="L34-kS-o3F"/>
+                            <constraint firstItem="6oQ-KW-45D" firstAttribute="top" secondItem="lJY-Gm-be8" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Ogg-TF-a1L"/>
+                            <constraint firstItem="lJY-Gm-be8" firstAttribute="top" secondItem="M0t-vg-kY7" secondAttribute="top" constant="25" id="XQz-3V-PbL"/>
+                            <constraint firstItem="lJY-Gm-be8" firstAttribute="leading" secondItem="M0t-vg-kY7" secondAttribute="leading" constant="32" id="mei-hX-6tX"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add Text" id="kNi-yl-V5L">
+                        <barButtonItem key="backBarButtonItem" title="Save" id="iVR-uy-hTq"/>
+                    </navigationItem>
+                    <value key="contentSizeForViewInPopover" type="size" width="320" height="400"/>
+                    <connections>
+                        <outlet property="textView" destination="6oQ-KW-45D" id="vbe-AL-5iU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jhK-9Y-5bU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2202" y="960"/>
+        </scene>
     </scenes>
     <resources>
         <image name="man_24.png" width="24" height="24"/>
     </resources>
+    <classes>
+        <class className="AddTextViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddTextViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="ContentPickerViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ContentPickerViewController.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="ProfileViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="textFieldDidChange:" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="usernameField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="StreamViewController" superclassName="UICollectionViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/StreamViewController.h"/>
+        </class>
+        <class className="UICollectionViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewController.h"/>
+        </class>
+        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
+        </class>
+        <class className="UICollectionViewLayout" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
