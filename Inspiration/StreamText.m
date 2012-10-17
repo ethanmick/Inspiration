@@ -32,4 +32,8 @@
     return self;
 }
 
+- (id)getContent {
+    return self.text;
+}
+
 @end

@@ -28,4 +28,8 @@
     return [self.objectId isEqual:((StreamItem *)object).objectId];
 }
 
+- (id)getContent {
+    return nil;
+}
+
 @end
