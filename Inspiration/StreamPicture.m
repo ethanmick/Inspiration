@@ -42,6 +42,7 @@
 }
 
 - (void)setupBlock {
+    
     __block StreamPicture *unretainedSelf = self;
     
     fileFetchResponse = ^(CMFileFetchResponse *response) {
@@ -76,6 +77,7 @@
                            additionalOptions:nil
                                     callback:^(CMFileUploadResponse *response) {
                                         DLog(@"Saved Image File: %@ - %d", self.imageName, response.result);
+                                        [[NSNotificationCenter defaultCenter] postNotificationName:@"PictureFinishedDownloading" object:self];
                                     }];
 }
 
@@ -91,6 +93,7 @@
                                additionalOptions:nil
                                         callback:^(CMFileUploadResponse *response) {
                                             DLog(@"Saved Image File: %@ - %d", self.imageName, response.result);
+                                            [[NSNotificationCenter defaultCenter] postNotificationName:@"PictureFinishedDownloading" object:self];
                                         }];
 }
 
@@ -106,6 +109,10 @@
     [[CMStore defaultStore] userFileWithName:self.imageName
                            additionalOptions:nil
                                     callback:fileFetchResponse];
+}
+
+- (void)dealloc {
+    self.image = nil;
 }
 
 @end

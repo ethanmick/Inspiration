@@ -25,6 +25,9 @@
 - (void)reset {
     [self.textLabel removeFromSuperview];
     [self.image removeFromSuperview];
+    self.textLabel = nil;
+    self.image.image = nil;
+    self.image = nil;
 }
 
 - (void)configureAsText:(StreamText *)text {

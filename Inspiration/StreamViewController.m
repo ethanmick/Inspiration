@@ -224,7 +224,8 @@
         StreamPicture *picDataUser = [picData copy];
         [picDataUser saveItemWithUser:user];
     }
-        
+    
+    [self.streamItems addObject:picData];
     [self.imagePopUp dismissPopoverAnimated:YES];
 }
 
