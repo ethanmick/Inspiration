@@ -39,12 +39,24 @@
         switch (resultCode) {
                 // If the login succeded, notify the delegate
             case CMUserAccountLoginSucceeded:
+            {
                 if ([unretainedSelf.delegate respondsToSelector:@selector(profileControllerDidSelectUser:)])
                     [unretainedSelf.delegate profileControllerDidSelectUser:unretainedSelf.user];
+                
+                UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Logged In!"
+                                                                  message:@"You have been successfully logged in."
+                                                                 delegate:nil
+                                                        cancelButtonTitle:@"Thanks"
+                                                        otherButtonTitles:nil];
+                [success show];
                 break;
                 
+            }
+                
+                
                 // If the login failed, clear the password field and alert the user
-            case CMUserAccountLoginFailedIncorrectCredentials: {
+            case CMUserAccountLoginFailedIncorrectCredentials:
+            {
                 unretainedSelf.passwordField.text = nil;
                 UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Error"
                                                                      message:@"Your username or password was incorrect"
