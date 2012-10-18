@@ -41,8 +41,10 @@
     
     CMUser *user = [[CMStore defaultStore] user];
     
-    if (user) {
-        [newText saveWithUser:user callback:^(CMObjectUploadResponse *response) {
+    if (user.isLoggedIn) {
+        StreamText *copyText = [[StreamText alloc] init];
+        copyText.text = newText.text;
+        [copyText saveWithUser:user callback:^(CMObjectUploadResponse *response) {
             DLog(@"Saved With user: %@", response.uploadStatuses);
         }];
     }
