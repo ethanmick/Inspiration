@@ -39,5 +39,6 @@
 - (void)saveItem {}
 - (void)saveItemWithUser:(CMUser *)user {}
 - (void)downloadContent {}
+- (void)downloadContentForUser:(CMUser *)user {}
 
 @end
