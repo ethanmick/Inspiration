@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) CMUser *user;
 @property (nonatomic, weak) id<ProfileViewControllerDelegate> delegate;
+@property (nonatomic) BOOL globalStream;
 
 @end
 

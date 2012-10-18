@@ -25,7 +25,7 @@
 
 @implementation ProfileViewController
 
-@synthesize user = _user, delegate;
+@synthesize user = _user, delegate, globalStream;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -69,6 +69,10 @@
     self.passwordField.text = [userInfo valueForKey:@"password"];
     self.user.userId = [userInfo valueForKey:@"username"];
     self.user.password = [userInfo valueForKey:@"password"];
+    
+    if (!self.globalStream) {
+        self.streamLabel.text = @"Global Stream";
+    }
 }
 
 #pragma mark - Cloudmine Login Methods
