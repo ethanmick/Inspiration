@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ProfileViewController.h"
 
-@interface StreamViewController : UICollectionViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ProfileViewControllerDelegate, UIPopoverControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface StreamViewController : UICollectionViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ProfileViewControllerDelegate, UIPopoverControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic, strong) CMUser *user;
 

@@ -46,6 +46,7 @@
                                                object:nil];
     
     UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+    flowLayout.itemSize = CGSizeMake(280, 280);
     flowLayout.minimumLineSpacing = 30.0;
     flowLayout.minimumInteritemSpacing = 20.0;
     flowLayout.sectionInset = UIEdgeInsetsMake(50, 50, 23.6, 0);
@@ -72,7 +73,7 @@
         ((UIStoryboardPopoverSegue *)segue).popoverController.delegate = self;
     } else if ([identifier isEqualToString:@"selectedItem"]) {
         SelectedItemViewController *selected = segue.destinationViewController;
-        selected.content = [[self.streamItems objectAtIndex:self.selectedIndexPath.row] getContent];
+        selected.content = [self.streamItems objectAtIndex:self.selectedIndexPath.row];
     }
 }
 
@@ -172,8 +173,6 @@
 - (void)mergeArray:(NSMutableArray *)original withArray:(NSArray *)target {
     
     @synchronized(self) {
-        DLog(@"Original: %@", original);
-        DLog(@"Target: %@", target);
         
         NSMutableArray *toAddArray = [NSMutableArray array];
         
@@ -197,8 +196,6 @@
         for (id toAdd in toAddArray) {
             [original addObject:toAdd];
         }
-        
-        DLog(@"End: %@", original);
     }
     
 }
@@ -227,6 +224,7 @@
 - (void)setUser:(CMUser *)user {
     _user = user;
     
+    DLog(@"UserID: %@", user.userId);
     // Set this user as the user of the default store
     CMStore *store = [CMStore defaultStore];
     store.user = _user;
@@ -265,49 +263,18 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    UIImage *imagePicked = [info valueForKey:UIImagePickerControllerOriginalImage];
-    
-    ///
-    /// Save the image
-    ///
-    NSData *imageData = UIImagePNGRepresentation(imagePicked);
-    NSString *imageName = [NSString stringWithFormat:@"image%@%d", [[NSDate alloc] init], arc4random()];
+    NSString *imageName = [NSString stringWithFormat:@"image-%@-%d-%@", [[NSDate alloc] init], arc4random(), [[NSUUID new] UUIDString]];
     
     StreamPicture *picData = [[StreamPicture alloc] init];
     picData.imageName = imageName;
-    
-    [picData save:^(CMObjectUploadResponse *response) {
-        DLog(@"Image Saved %@", response.uploadStatuses);
-    }];
-    
-    [[CMStore defaultStore] saveFileWithData:imageData
-                                named:imageName
-                    additionalOptions:nil
-                             callback:^(CMFileUploadResponse *response) {
-                                 DLog(@"Image File Saved: %d", response.result);
-                                 [self refreshData];
-                             }];
-    
+    picData.image = [info valueForKey:UIImagePickerControllerOriginalImage];
+    [picData saveItem];
     
     CMUser *user = [[CMStore defaultStore] user];
     
     if ([user isLoggedIn]) {
-        
-        StreamPicture *picDataUser = [[StreamPicture alloc] init];
-        picDataUser.imageName = imageName;
-        
-        [picDataUser saveWithUser:user callback:^(CMObjectUploadResponse *response) {
-            DLog(@"Image Saved with User.");
-        }];
-        
-        [[CMStore defaultStore] saveUserFileWithData:imageData
-                                        named:imageName
-                            additionalOptions:nil
-                                     callback:^(CMFileUploadResponse *response) {
-                                         DLog(@"Image Filed User Saved: %d", response.result);
-                                         [self refreshData];
-                                     }];
-        
+        StreamPicture *picDataUser = [picData copy];
+        [picDataUser saveItemWithUser:user];
     }
         
     [self.imagePopUp dismissPopoverAnimated:YES];
@@ -344,24 +311,25 @@
     return cell;
 }
 
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    [self.collectionView.collectionViewLayout invalidateLayout];
+/*
+ ///
+ /// Need to resize the cell content too.
+ /// Can figure out later.
+ ///
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    CGSize newCellSize = CGSizeZero;
+    if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
+         newCellSize = CGSizeMake(280, 280);
+    } else {
+        newCellSize = CGSizeMake(350, 350);
+    }
+    ((UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout).itemSize = newCellSize;
 }
-
+ */
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedIndexPath = indexPath;
     [self performSegueWithIdentifier:@"selectedItem" sender:self];
-}
-
-#pragma mark - UICollectionViewFlowLayout Deleage Methods
-
-- (CGSize)collectionView:(UICollectionView *)collectionView
-                  layout:(UICollectionViewLayout*)collectionViewLayout
-  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    return CGSizeMake(350, 350);
-
 }
 
 @end
