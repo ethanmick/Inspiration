@@ -8,6 +8,7 @@ File issues. I can't store the meta data with the files, so I need to have anoth
 Class Documentation on all the objects in the SDK. Found it (better link?)
 
 Users should/can/maybe store username/password, and not just the token?
+(TEST THIS AGAIN)
 
 
 
@@ -18,3 +19,7 @@ Not sure what the extra options do. Maybe solves my problems like getting batche
 Not being able to save to global level and user level with the same object doesn't make a ton of sense, at the very least it should just make a new object in the background.
 
 At one point, all of my data was deleted? Not sure how.
+
+Not sure why the "UserData" option on the dashboard was greyed out - I had users. Oh, I had to log in first. That's not clear in the dashboard UI - you should change that so if I click on the User Data, it asks me to login as a user to access their data.
+
+Had some trouble a couple times connecting to the server, not sure why.
