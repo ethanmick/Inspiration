@@ -10,12 +10,15 @@
 #import "StreamCell.h"
 #import "StreamText.h"
 #import "StreamPicture.h"
+#import "SelectedItemViewController.h"
 
 @interface StreamViewController ()
 
 @property (atomic, strong) NSMutableArray *streamItems;
+@property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 @property (nonatomic, strong) UIPopoverController *imagePopUp;
 @property (nonatomic, strong) UIPopoverController *currentPopOver;
+@property (nonatomic) BOOL globalStream;
 
 - (void)refreshData;
 - (IBAction)launchImagePicker:(id)sender;
@@ -26,19 +29,20 @@
 
 @implementation StreamViewController
 
-@synthesize streamItems, user = _user, imagePopUp, currentPopOver;
+@synthesize streamItems, user = _user, imagePopUp, currentPopOver, selectedIndexPath;
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.globalStream = YES;
     
 	[self.collectionView registerClass:[StreamCell class] forCellWithReuseIdentifier:@"STREAM_CELL"];
     self.streamItems = [[NSMutableArray alloc] init];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(launchPicker:)
-                                                 name:@"LaunchUIIMagePicker"
+                                             selector:@selector(changeStream:)
+                                                 name:@"ChangeToPersonalStream"
                                                object:nil];
     
     UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
@@ -63,11 +67,29 @@
         ProfileViewController *profileController = segue.destinationViewController;
         profileController.delegate = self;
         profileController.user = self.user;
+        profileController.globalStream = self.globalStream;
     } else if ([identifier isEqualToString:@"addContent"]) {
         ((UIStoryboardPopoverSegue *)segue).popoverController.delegate = self;
+    } else if ([identifier isEqualToString:@"selectedItem"]) {
+        SelectedItemViewController *selected = segue.destinationViewController;
+        selected.content = [[self.streamItems objectAtIndex:self.selectedIndexPath.row] getContent];
     }
 }
 
+- (void)changeStream:(NSNotification *)note {
+    [self.streamItems removeAllObjects];
+    self.globalStream = !self.globalStream;
+    if (self.globalStream) {
+        self.title = @"Global Stream";
+    } else {
+        self.title = @"My Stream";
+    }
+    [self refreshData];
+}
+
+///
+/// Fix
+///
 - (void)refreshData {
     
     ///
@@ -75,38 +97,75 @@
     ///
     CMStore *store = [CMStore defaultStore];
     
-    [store allObjectsWithOptions:nil callback:^(CMObjectFetchResponse *response) {
-        DLog(@"Response: %@", response.objects);
-        self.streamItems = [NSMutableArray arrayWithArray:response.objects];
-        
-        NSMutableArray *toRemove = [NSMutableArray array];
-        
-        for (id object in self.streamItems) {
+    if (self.globalStream) {
+        [store allObjectsWithOptions:nil callback:^(CMObjectFetchResponse *response) { //changed
+            DLog(@"Response: %@", response.objects);
+            self.streamItems = [NSMutableArray arrayWithArray:response.objects];
             
-            if ( ![object isKindOfClass:[StreamText class]] && ![object isKindOfClass:[StreamPicture class]] ) {
-                [toRemove addObject:object];
+            NSMutableArray *toRemove = [NSMutableArray array];
+            
+            for (id object in self.streamItems) {
+                
+                if ( ![object isKindOfClass:[StreamText class]] && ![object isKindOfClass:[StreamPicture class]] ) {
+                    [toRemove addObject:object];
+                }
+                
+                if ([object isKindOfClass:[StreamPicture class]]) {
+                    StreamPicture *pic = (StreamPicture *)object;
+                    [store fileWithName:pic.imageName
+                      additionalOptions:nil callback:^(CMFileFetchResponse *response) { //change
+                          NSData *imageData = response.file.fileData;
+                          if (imageData) {
+                              pic.image = [UIImage imageWithData:imageData];
+                              [self.collectionView reloadData];
+                          }
+                      }];
+                }
+                
             }
             
-            if ([object isKindOfClass:[StreamPicture class]]) {
-                StreamPicture *pic = (StreamPicture *)object;
-                [store fileWithName:pic.imageName
-                  additionalOptions:nil callback:^(CMFileFetchResponse *response) {
-                      NSData *imageData = response.file.fileData;
-                      if (imageData) {
-                          pic.image = [UIImage imageWithData:imageData];
-                          [self.collectionView reloadData];
-                      }
-                  }];
+            for (id object in toRemove) {
+                [self.streamItems removeObject:object];
             }
             
-        }
-        
-        for (id object in toRemove) {
-            [self.streamItems removeObject:object];
-        }
-        
-        [self.collectionView reloadData];
-    }];
+            [self.collectionView reloadData];
+        }];
+    } else {
+        [store allUserObjectsWithOptions:nil callback:^(CMObjectFetchResponse *response) { //changed
+            DLog(@"Response: %@", response.objects);
+            self.streamItems = [NSMutableArray arrayWithArray:response.objects];
+            
+            NSMutableArray *toRemove = [NSMutableArray array];
+            
+            for (id object in self.streamItems) {
+                
+                if ( ![object isKindOfClass:[StreamText class]] && ![object isKindOfClass:[StreamPicture class]] ) {
+                    [toRemove addObject:object];
+                }
+                
+                if ([object isKindOfClass:[StreamPicture class]]) {
+                    StreamPicture *pic = (StreamPicture *)object;
+                    [store userFileWithName:pic.imageName
+                      additionalOptions:nil callback:^(CMFileFetchResponse *response) { //change
+                          NSData *imageData = response.file.fileData;
+                          if (imageData) {
+                              pic.image = [UIImage imageWithData:imageData];
+                              [self.collectionView reloadData];
+                          }
+                      }];
+                }
+                
+            }
+            
+            for (id object in toRemove) {
+                [self.streamItems removeObject:object];
+            }
+            
+            [self.collectionView reloadData];
+        }];
+    }
+    
+    
     
 }
 
@@ -221,7 +280,7 @@
         DLog(@"Image Saved %@", response.uploadStatuses);
     }];
     
-    [[CMStore store] saveFileWithData:imageData
+    [[CMStore defaultStore] saveFileWithData:imageData
                                 named:imageName
                     additionalOptions:nil
                              callback:^(CMFileUploadResponse *response) {
@@ -230,14 +289,18 @@
                              }];
     
     
-    CMUser *user = [[CMStore store] user];
+    CMUser *user = [[CMStore defaultStore] user];
     
-    if (user) {
-        [picData saveWithUser:user callback:^(CMObjectUploadResponse *response) {
+    if ([user isLoggedIn]) {
+        
+        StreamPicture *picDataUser = [[StreamPicture alloc] init];
+        picDataUser.imageName = imageName;
+        
+        [picDataUser saveWithUser:user callback:^(CMObjectUploadResponse *response) {
             DLog(@"Image Saved with User.");
         }];
         
-        [[CMStore store] saveUserFileWithData:imageData
+        [[CMStore defaultStore] saveUserFileWithData:imageData
                                         named:imageName
                             additionalOptions:nil
                                      callback:^(CMFileUploadResponse *response) {
@@ -283,6 +346,12 @@
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
     [self.collectionView.collectionViewLayout invalidateLayout];
+}
+
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    self.selectedIndexPath = indexPath;
+    [self performSegueWithIdentifier:@"selectedItem" sender:self];
 }
 
 #pragma mark - UICollectionViewFlowLayout Deleage Methods
