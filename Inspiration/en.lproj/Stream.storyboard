@@ -27,7 +27,40 @@
             </objects>
             <point key="canvasLocation" x="-1693" y="-205"/>
         </scene>
-        <!--Stream View Controller-->
+        <!--Selected Item View Controller-->
+        <scene sceneID="sz5-I7-n02">
+            <objects>
+                <viewController modalPresentationStyle="formSheet" id="wI6-r7-SlT" customClass="SelectedItemViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HxU-3y-v9C">
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H3u-9L-9fS">
+                                <items>
+                                    <barButtonItem systemItem="save" id="qHl-80-MSl"/>
+                                    <barButtonItem systemItem="action" id="9gO-dO-sXw"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="D41-e3-Ld7"/>
+                                    <barButtonItem systemItem="cancel" id="Vgb-pY-qPY">
+                                        <connections>
+                                            <action selector="dismissSelectedItemView:" destination="wI6-r7-SlT" id="MoA-8q-jjP"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="H3u-9L-9fS" firstAttribute="trailing" secondItem="HxU-3y-v9C" secondAttribute="trailing" type="default" id="11z-Bc-1kg"/>
+                            <constraint firstItem="H3u-9L-9fS" firstAttribute="leading" secondItem="HxU-3y-v9C" secondAttribute="leading" type="default" id="2tF-tD-wQR"/>
+                            <constraint firstItem="H3u-9L-9fS" firstAttribute="bottom" secondItem="HxU-3y-v9C" secondAttribute="bottom" type="default" id="tQJ-Cu-o3i"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kx7-Oa-hxb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-726" y="972"/>
+        </scene>
+        <!--Stream View Controller - Global Stream-->
         <scene sceneID="4y2-df-UK6">
             <objects>
                 <collectionViewController autoresizesArchivedViewToFullSize="NO" id="Ll2-aS-tZw" customClass="StreamViewController" sceneMemberID="viewController">
@@ -40,7 +73,20 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
-                        <cells/>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AStreamCell" id="vWs-mK-6mV">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <connections>
+                                    <segue destination="wI6-r7-SlT" kind="modal" identifier="selectedItem" modalPresentationStyle="formSheet" modalTransitionStyle="flipHorizontal" id="oik-ce-waG"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
                         <connections>
                             <outlet property="dataSource" destination="Ll2-aS-tZw" id="XBA-Iq-o38"/>
                             <outlet property="delegate" destination="Ll2-aS-tZw" id="0a4-VR-djI"/>
@@ -62,7 +108,7 @@
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" id="khI-mL-2gL">
+                    <navigationItem key="navigationItem" title="Global Stream" id="khI-mL-2gL">
                         <barButtonItem key="rightBarButtonItem" image="man_24.png" id="uC0-XE-uta">
                             <connections>
                                 <segue destination="B1d-Ds-449" kind="popover" identifier="profile" popoverAnchorBarButtonItem="uC0-XE-uta" id="Jsi-Q2-6Ip">
@@ -218,15 +264,44 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection id="7Og-rN-j54">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="vRu-3B-kdq">
+                                        <rect key="frame" x="0.0" y="250" width="768" height="46"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="45" y="1" width="678" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="My Stream" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="JSA-3F-bcA">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="fX2-Pg-Edu"/>
+                                                        <constraint firstAttribute="width" constant="678" id="nlN-jz-cP4"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="JSA-3F-bcA" firstAttribute="centerX" secondItem="vRu-3B-kdq" secondAttribute="centerX" type="default" id="PSN-Rg-xEg"/>
+                                            <constraint firstItem="JSA-3F-bcA" firstAttribute="centerY" secondItem="vRu-3B-kdq" secondAttribute="centerY" type="default" id="ftL-k6-ypm"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="B1d-Ds-449" id="DuG-EI-66h"/>
                             <outlet property="delegate" destination="B1d-Ds-449" id="xwL-oO-VGr"/>
                         </connections>
                     </tableView>
-                    <value key="contentSizeForViewInPopover" type="size" width="320" height="250"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="320" height="350"/>
                     <connections>
                         <outlet property="passwordField" destination="7hN-Yx-IUP" id="hvv-LO-5Sq"/>
+                        <outlet property="streamLabel" destination="JSA-3F-bcA" id="TqK-P1-BQy"/>
                         <outlet property="usernameField" destination="vN9-kc-69b" id="7ph-SY-ccr"/>
                     </connections>
                 </tableViewController>
@@ -348,40 +423,6 @@
     <resources>
         <image name="man_24.png" width="24" height="24"/>
     </resources>
-    <classes>
-        <class className="AddTextViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddTextViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="ContentPickerViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ContentPickerViewController.h"/>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="ProfileViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="textFieldDidChange:" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="usernameField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="StreamViewController" superclassName="UICollectionViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/StreamViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="launchImagePicker:"/>
-            </relationships>
-        </class>
-        <class className="UICollectionViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewController.h"/>
-        </class>
-        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
