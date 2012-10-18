@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class StreamItem;
+
 @interface SelectedItemViewController : UIViewController
 
-@property (nonatomic, strong) id content;
+@property (nonatomic, strong) StreamItem *content;
 
 @end

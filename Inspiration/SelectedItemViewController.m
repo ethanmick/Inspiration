@@ -7,10 +7,14 @@
 //
 
 #import "SelectedItemViewController.h"
+#import "StreamItem.h"
+#import "StreamPicture.h"
 
 @interface SelectedItemViewController ()
 
 - (IBAction)dismissSelectedItemView:(id)sender;
+- (IBAction)saveAction:(id)sender;
+// - (IBAction)shareAction:(id)sender; //Add later
 
 
 @end
@@ -23,15 +27,15 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if ([self.content isKindOfClass:[UIImage class]]) {
+    if ([self.content.typeOfItem isEqualToString:@"picture"]) {
         ///
         /// Setup Image
         ///
         UIScrollView *scrollview = [[UIScrollView alloc]
                                     initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 44)];
         
-        UIImageView *image = [[UIImageView alloc] initWithImage:self.content];
-        CGSize imageSize = [self.content size];
+        UIImageView *image = [[UIImageView alloc] initWithImage:[self.content getContent]];
+        CGSize imageSize = [[self.content getContent] size];
         image.frame = CGRectMake(0.0, 0.0, imageSize.width, imageSize.height);
         scrollview.contentSize = imageSize;
         
@@ -56,7 +60,7 @@
         /// Setup text
         ///
         UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 44)];
-        textLabel.text = self.content;
+        textLabel.text = [self.content getContent];
         textLabel.lineBreakMode = NSLineBreakByWordWrapping;
         textLabel.adjustsFontSizeToFitWidth = YES;
         textLabel.numberOfLines = 0;
@@ -66,4 +70,27 @@
     }
 
 }
+
+- (IBAction)saveAction:(id)sender {
+    
+    CMUser *user = [[CMStore defaultStore] user];
+    if (user.isLoggedIn) {
+        StreamItem *item = [self.content copy];
+        [item saveItemWithUser:user];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:@"Please Log in to save images to your stream."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Okay"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+/*
+- (IBAction)shareAction:(id)sender {
+    
+}
+*/
+ 
 @end
