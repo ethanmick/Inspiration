@@ -34,22 +34,14 @@
     ///
     StreamText *newText = [[StreamText alloc] init];
     newText.text = textView.text;
-    
-    [newText save:^(CMObjectUploadResponse *response) {
-        DLog(@"Item Saved? %@", response.uploadStatuses);
-    }];
+    [newText saveItem];
     
     CMUser *user = [[CMStore defaultStore] user];
     
     if (user.isLoggedIn) {
-        StreamText *copyText = [[StreamText alloc] init];
-        copyText.text = newText.text;
-        [copyText saveWithUser:user callback:^(CMObjectUploadResponse *response) {
-            DLog(@"Saved With user: %@", response.uploadStatuses);
-        }];
+        StreamText *copyText = [newText copy];
+        [copyText saveItemWithUser:user];
     }
-    
-
 }
 
 
