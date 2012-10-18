@@ -35,6 +35,7 @@
 		AACBE0001627658800788DFA /* StreamItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AACBDFFF1627658800788DFA /* StreamItem.m */; };
 		AACBE003162765A000788DFA /* StreamPicture.m in Sources */ = {isa = PBXBuildFile; fileRef = AACBE002162765A000788DFA /* StreamPicture.m */; };
 		AACBE006162765E800788DFA /* StreamText.m in Sources */ = {isa = PBXBuildFile; fileRef = AACBE005162765E800788DFA /* StreamText.m */; };
+		AAE5D23D162F4DEA00B8F5FC /* SelectedItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE5D23C162F4DEA00B8F5FC /* SelectedItemViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +80,8 @@
 		AACBE002162765A000788DFA /* StreamPicture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamPicture.m; sourceTree = "<group>"; };
 		AACBE004162765E800788DFA /* StreamText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamText.h; sourceTree = "<group>"; };
 		AACBE005162765E800788DFA /* StreamText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamText.m; sourceTree = "<group>"; };
+		AAE5D23B162F4DEA00B8F5FC /* SelectedItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectedItemViewController.h; sourceTree = "<group>"; };
+		AAE5D23C162F4DEA00B8F5FC /* SelectedItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectedItemViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +142,7 @@
 			children = (
 				AA1F1D2F1627427300EAF636 /* App Delegate */,
 				AA1F1D301627428400EAF636 /* Stream */,
+				AAE5D23A162F4DD300B8F5FC /* Selected View */,
 				AA5BF959162D0EA1008C55D2 /* Profile */,
 				AA5BF973162DE2A1008C55D2 /* Add Info */,
 				AACBDFFD1627654D00788DFA /* Model */,
@@ -244,6 +248,15 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		AAE5D23A162F4DD300B8F5FC /* Selected View */ = {
+			isa = PBXGroup;
+			children = (
+				AAE5D23B162F4DEA00B8F5FC /* SelectedItemViewController.h */,
+				AAE5D23C162F4DEA00B8F5FC /* SelectedItemViewController.m */,
+			);
+			name = "Selected View";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -324,6 +337,7 @@
 				AA5BF96E162DC769008C55D2 /* SimpleKeychain.m in Sources */,
 				AA5BF976162DE2BD008C55D2 /* ContentPickerViewController.m in Sources */,
 				AA917BE1162DE6AA000FA6A6 /* AddTextViewController.m in Sources */,
+				AAE5D23D162F4DEA00B8F5FC /* SelectedItemViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
