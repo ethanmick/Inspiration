@@ -7,12 +7,23 @@
 //
 
 #import "ContentPickerViewController.h"
+#import "AddTextViewController.h"
 
 @interface ContentPickerViewController ()
 
 @end
 
 @implementation ContentPickerViewController
+
+@synthesize globalStream;
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"textContent"]) {
+        AddTextViewController *con = segue.destinationViewController;
+        con.globalStream = self.globalStream;
+    }
+}
 
 #pragma mark - Table view delegate
 

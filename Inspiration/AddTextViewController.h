@@ -11,4 +11,6 @@
 @interface AddTextViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (nonatomic) BOOL globalStream;
+
 @end

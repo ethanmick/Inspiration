@@ -16,7 +16,7 @@
 
 @implementation AddTextViewController
 
-@synthesize textView;
+@synthesize textView, globalStream;
 
 - (void)viewDidLoad
 {
@@ -34,7 +34,10 @@
     ///
     StreamText *newText = [[StreamText alloc] init];
     newText.text = textView.text;
-    [newText saveItem];
+    if (self.globalStream) {
+        [newText saveItem];
+    }
+    
     
     CMUser *user = [[CMStore defaultStore] user];
     

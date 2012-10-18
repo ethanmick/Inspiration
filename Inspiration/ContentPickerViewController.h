@@ -10,4 +10,6 @@
 
 @interface ContentPickerViewController : UITableViewController
 
+@property (nonatomic) BOOL globalStream;
+
 @end
