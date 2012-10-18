@@ -13,5 +13,8 @@
 @property (nonatomic, strong) NSString *typeOfItem;
 
 - (id)getContent;
+- (id)copyWithZone:(NSZone *)zone;
+- (void)saveItem;
+- (void)saveItemWithUser:(CMUser *)user;
 
 @end

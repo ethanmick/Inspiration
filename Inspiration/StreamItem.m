@@ -32,4 +32,11 @@
     return nil;
 }
 
+- (id)copyWithZone:(NSZone *)zone {
+    return nil;
+}
+
+- (void)saveItem {}
+- (void)saveItemWithUser:(CMUser *)user {}
+
 @end
