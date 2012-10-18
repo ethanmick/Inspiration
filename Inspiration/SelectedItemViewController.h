@@ -10,4 +10,6 @@
 
 @interface SelectedItemViewController : UIViewController
 
+@property (nonatomic, strong) id content;
+
 @end
