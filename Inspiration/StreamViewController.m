@@ -140,9 +140,9 @@
     
     for (StreamItem *item in self.streamItems) {
         if (user) {
-            [item performSelector:selector withObject:[[CMStore defaultStore] user]];
+            [item performSelector:selector withObject:[[CMStore defaultStore] user]]; //lead
         } else {
-            [item performSelector:selector];
+            [item performSelector:selector]; //lead
         }
     }
     [self.collectionView reloadData];
