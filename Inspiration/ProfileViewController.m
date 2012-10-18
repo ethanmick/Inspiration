@@ -133,8 +133,11 @@
     ///
     /// Regardless - save the info
     ///
-    NSDictionary *userInfo = @{@"username" : self.usernameField.text, @"password" : self.passwordField.text};
-    [SimpleKeychain save:@"user" data:userInfo];
+    if (self.usernameField.text && self.passwordField.text) {
+        NSDictionary *userInfo = @{@"username" : self.usernameField.text, @"password" : self.passwordField.text};
+        [SimpleKeychain save:@"user" data:userInfo];
+    }
+    
     
     
     // If the user selects the login button
