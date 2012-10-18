@@ -79,8 +79,9 @@
         profileController.globalStream = self.globalStream;
     } else if ([identifier isEqualToString:@"addContent"]) { // "+" Button PopOver
         ((UIStoryboardPopoverSegue *)segue).popoverController.delegate = self;
-        ContentPickerViewController *con = segue.destinationViewController;
-        con.globalStream = self.globalStream;
+        UINavigationController *con = segue.destinationViewController;
+        ContentPickerViewController *addContent =  (ContentPickerViewController *)con.topViewController;
+        addContent.globalStream = self.globalStream;
     } else if ([identifier isEqualToString:@"selectedItem"]) { //User tapped an item
         SelectedItemViewController *selected = segue.destinationViewController;
         selected.content = [self.streamItems objectAtIndex:self.selectedIndexPath.row];
