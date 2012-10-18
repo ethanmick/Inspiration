@@ -216,7 +216,12 @@
     StreamPicture *picData = [[StreamPicture alloc] init];
     picData.imageName = imageName;
     picData.image = [info valueForKey:UIImagePickerControllerOriginalImage];
-    [picData saveItem];
+    
+    if (self.globalStream) {
+        [picData saveItem];
+    }
+    
+    
     
     CMUser *user = [[CMStore defaultStore] user];
     
