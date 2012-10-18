@@ -36,4 +36,23 @@
     return self.text;
 }
 
+- (id)copyWithZone:(NSZone *)zone {
+    StreamText *another = [[StreamText alloc] init];
+    another.text = [self.text copyWithZone:zone];
+    return another;
+}
+
+- (void)saveItem {
+    [self save:^(CMObjectUploadResponse *response) {
+        DLog(@"Saved Text: %@", self.text);
+    }];
+}
+
+- (void)saveItemWithUser:(CMUser *)user {
+    [self saveWithUser:user
+              callback:^(CMObjectUploadResponse *response) {
+                  DLog(@"Saved Text: %@", self.text);
+              }];
+}
+
 @end

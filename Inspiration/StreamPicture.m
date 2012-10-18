@@ -36,4 +36,41 @@
     return self.image;
 }
 
+- (id)copyWithZone:(NSZone *)zone {
+    StreamPicture *another = [[StreamPicture alloc] init];
+    another.image = [self.image copy];
+    another.imageName = [self.imageName copyWithZone:zone];
+    return another;
+}
+
+- (void)saveItem {
+    
+    [self save:^(CMObjectUploadResponse *response) {
+        DLog(@"Saved Item: %@ - %@", self.imageName, response.uploadStatuses);
+    }];
+    
+    NSData *data = UIImagePNGRepresentation(self.image);
+    [[CMStore defaultStore] saveFileWithData:data
+                                       named:self.imageName
+                           additionalOptions:nil
+                                    callback:^(CMFileUploadResponse *response) {
+                                        DLog(@"Saved Image File: %@ - %d", self.imageName, response.result);
+                                    }];
+}
+
+- (void)saveItemWithUser:(CMUser *)user {
+    [self saveWithUser:user callback:^(CMObjectUploadResponse *response) {
+        DLog(@"Saved Item: %@ - %@", self.imageName, response.uploadStatuses);
+    }];
+    
+    NSData *data = UIImagePNGRepresentation(self.image);
+    
+    [[CMStore defaultStore] saveUserFileWithData:data
+                                           named:self.imageName
+                               additionalOptions:nil
+                                        callback:^(CMFileUploadResponse *response) {
+                                            DLog(@"Saved Image File: %@ - %d", self.imageName, response.result);
+                                        }];
+}
+
 @end
