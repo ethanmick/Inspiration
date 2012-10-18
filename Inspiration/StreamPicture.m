@@ -8,6 +8,13 @@
 
 #import "StreamPicture.h"
 
+@interface StreamPicture () {
+    __block CMStoreFileFetchCallback fileFetchResponse;
+}
+
+
+@end
+
 @implementation StreamPicture
 
 @synthesize imageName = _imageName;
@@ -16,6 +23,7 @@
 - (id)init {
     if ( (self = [super init]) ) {
         self.typeOfItem = @"picture";
+        [self setupBlock];
     }
     return self;
 }
@@ -29,7 +37,20 @@
     if ((self = [super initWithCoder:aCoder])) {
         _imageName = [aCoder decodeObjectForKey:@"imageName"];
     }
+    [self setupBlock];
     return self;
+}
+
+- (void)setupBlock {
+    __block StreamPicture *unretainedSelf = self;
+    
+    fileFetchResponse = ^(CMFileFetchResponse *response) {
+        NSData *imageData = response.file.fileData;
+        if (imageData) {
+            unretainedSelf.image = [UIImage imageWithData:imageData];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"PictureFinishedDownloading" object:unretainedSelf];
+        }
+    };
 }
 
 - (id)getContent {
@@ -71,6 +92,20 @@
                                         callback:^(CMFileUploadResponse *response) {
                                             DLog(@"Saved Image File: %@ - %d", self.imageName, response.result);
                                         }];
+}
+
+- (void)downloadContent {
+    [[CMStore defaultStore] fileWithName:self.imageName
+                       additionalOptions:nil
+                                callback:fileFetchResponse];
+}
+
+
+- (void)downloadContentForUser:(CMUser *)user {
+    
+    [[CMStore defaultStore] userFileWithName:self.imageName
+                           additionalOptions:nil
+                                    callback:fileFetchResponse];
 }
 
 @end

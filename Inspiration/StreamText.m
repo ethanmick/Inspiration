@@ -55,4 +55,7 @@
               }];
 }
 
+- (void)downloadContentForUser:(CMUser *)user {}
+- (void)downloadContent {}
+
 @end
