@@ -144,9 +144,9 @@
     
     for (StreamItem *item in self.streamItems) {
         if (user) {
-            [item performSelector:selector withObject:[[CMStore defaultStore] user]]; //lead
+            [item performSelector:selector withObject:[[CMStore defaultStore] user]]; // Potential leak.
         } else {
-            [item performSelector:selector]; //lead
+            [item performSelector:selector]; // Potential leak.
         }
     }
     [self.collectionView reloadData];

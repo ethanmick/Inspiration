@@ -26,52 +26,51 @@ If you add content from the global stream view, you add it to both the global st
 
 ## A look at the Code
 
+The code is broken down into a pretty self explanatory way, grouped together in modules of similar functionality.  All the models are kept in the Model folder. These are a hierarchy, as many actions will need to be taken on a StreamItem in general.
 
+The rest of the code is basically the views and controllers.  The entire view setup is in the Stream.storyboard file.  The StreamViewController is the main controller which handles the stream, and the actions to leave or respond to events in the stream.
+
+Two things I will say about the code. 1, I did not focus on the UI heavily. The UI is an amazing aspect of the program to work on, but I was focused on learning and using the Cloudmine SDK and see what neat features it supported. The UI is simply a portal to these parts of the code. Secondly, the pictures used are not optimized. I should use smaller scaled images for the Collection View, and then when they load the picture when they select it, I should load the full image (and add pinch to zoom).  However, I decided these were outside the scope of the project. If you do load too many large images, the app eventually runs out of memory and crashes. I ran the profiler to examine issues, but fixing them was outside the scope.
+
+Please Pardon any bugs you find :)
 
 # The Cloudmine SDK
 
 ## What I liked
+I loved adding data by just sending the *saveFileWithData* method. It was extremely convenient when adding data and not having to save actual files.
+
+I love the flexibility of the SDK. The saving and loading of objects, for the most part, was extremely straightforward and easy. Didn't matter where in the code it was, and was consistant throughout.
+
+Blocks for callbacks are amazing.
+
+Examples on Cloudmine are super helpful, definitely expand on those.
 
 ## What I didn't like
 
+Not sure if I can store extra info with a file? Probably not with the "saveFileWithData" method, but perhaps by sending CMFile's (see Last Thoughts below).
+
+When I saved an object to the Global level, I tried saving the same object to the User level, but Cloudmine didn't like that. I had to create a new object to save to the User. I feel like that should be handled on the server side. Saving the same object in both places should simply work, perhaps make a new object on the server side.
+
+At one point, all of the objects on the server were deleted. I'm not sure how, considering my code does not include any delete calls.
+
+A couple of times I have trouble connecting to the Cloudmine server, not sure why.
+
 ## What I wanted to see
+
+I was thinking of using Cloudmine in a previous project, but already had a Core Data structure set up. It would be *amazing* to see the CM SDK interface with Core Data objects. Along the same thought, if Cloudmine also cached objects so they don't need to be redownloaded between app closes (complete shutdowns).
+
+Perhaps use the Security Framework to store usernames and passwords (but just store the token normally). This would enable the framework to securely store the info.
+
+The "User Data" option in the dashboard is greyed out until a user logs in, took me a bit to figure this out. Perhaps if you click user data it prompts you to log in as a user.
 
 # Last Thoughts
 
+I might have been able to use CMFile for storing information with files - what I do now is store information about the Images (there could be extra information in the future), in a separate StreamPicture object. None of the examples showed using CMFile, so I wasn't aware of it until later in the project.
 
+I found the Class Documentation after a bit of hunting around. Under the iOS Library, I would have loved a link in the sidebar to go straight to the class documentation. Also, some methods are not documented.
 
-# What I liked
+I'm not sure if files need a unique name or not. It looks like it does... "The name to give the file on CloudMine. This must be unique throughout all instances of your app." But Paul Solt told me that Marc said it didn't need to be. Or something like that. So I created names, but then had to save them in a different object.
 
-Adding file from data is excellent <3
+## Thanks!
 
-# What I wanted to see
-File issues. I can't store the meta data with the files, so I need to have another object to use with the file. Annoying.
-
-Class Documentation on all the objects in the SDK. Found it (better link?)
-
-Users should/can/maybe store username/password, and not just the token?
-(TEST THIS AGAIN)
-
-
-
-Caching & Syncing would be hard... but amazing. (Core data integration?)
-
-Not sure what the extra options do. Maybe solves my problems like getting batches?
-
-Not being able to save to global level and user level with the same object doesn't make a ton of sense, at the very least it should just make a new object in the background.
-
-At one point, all of my data was deleted? Not sure how.
-
-Not sure why the "UserData" option on the dashboard was greyed out - I had users. Oh, I had to log in first. That's not clear in the dashboard UI - you should change that so if I click on the User Data, it asks me to login as a user to access their data.
-
-Had some trouble a couple times connecting to the server, not sure why.
-
-Unique Name for files. The documentation says "The unique name of the file to download.". It looks like it needs to be unique.  Remove NSData if it's making things confusing with files.
-
-
-
-Please pardon the UI.  View can jerk while loading, images can't be zoomed in, and it looks pretty ugly throughout. That was not the purpose.
-
-Pardon bugs found.
-
-Performace. Images, redownloading, no caching. Ran the profiler.
+This was a great opportunity to go through and learn the Cloudmine SDK, as well as work on a project for a bit. I really enjoy iOS development, and enjoy the possibility of working at Cloudmine. Regardless, thank you so much!
