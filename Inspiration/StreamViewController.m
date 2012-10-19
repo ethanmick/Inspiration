@@ -269,22 +269,6 @@
     return cell;
 }
 
-/*
- ///
- /// Need to resize the cell content too.
- /// Can figure out later.
- ///
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    CGSize newCellSize = CGSizeZero;
-    if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
-         newCellSize = CGSizeMake(280, 280);
-    } else {
-        newCellSize = CGSizeMake(350, 350);
-    }
-    ((UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout).itemSize = newCellSize;
-}
- */
-
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedIndexPath = indexPath;
     [self performSegueWithIdentifier:@"selectedItem" sender:self];
